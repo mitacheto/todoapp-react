@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
-import Welcome from './pages/Welcome';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import './App.css';
+import Welcome from './pages/Welcome';
+import './App.scss';
 
 export const CredentialsContext = React.createContext(null);
 
@@ -15,6 +16,7 @@ export default function App() {
                 <Router>
                     <Routes>
                         <Route path='/' element={<Welcome />}></Route>
+                        <Route path='/dashboard/' element={<Dashboard />}></Route>
                         <Route path='/register' element={<Register />}></Route>
                         <Route path='/login' element={<Login />}></Route>
                     </Routes>

@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CredentialsContext } from '../App';
+import React, { useEffect, useState } from 'react';
 
 export default function Todos() {
     const [todos, setTodos] = useState([]);
     const [filteredTodos, setFilteredTodos] = useState([]);
     const [todoText, setTodoText] = useState('');
-    const [credentials] = useContext(CredentialsContext);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('uncompleted');
     const [updatedStateOfTodos, setUpdatedStateOfTodos] = useState();
@@ -22,7 +20,6 @@ export default function Todos() {
     };
 
     useEffect(() => {
-        console.log('here');
         fetch('http://localhost:4000/todos', {
             method: 'GET',
             headers: {
@@ -32,7 +29,7 @@ export default function Todos() {
         })
             .then((response) => response.json())
             .then((todos) => {
-                if (todos) {
+                if (!todos.message) {
                     setTodos(todos);
                     setFilteredTodos(todos.filter((todo) => (filter === 'uncompleted' ? !todo.checked : todo.checked)));
                 }

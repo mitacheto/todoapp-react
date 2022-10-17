@@ -1,0 +1,49 @@
+.loginText {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.errorMsg {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: red;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ea4c89;
+    border-radius: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+    align-items: center;
+
+    li {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10%;
+        list-style-type: none;
+        text-align: center;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        display: block;
+        padding-inline-start: 0;
+    }
+
+    button {
+        margin-bottom: 10%;
+    }
+}

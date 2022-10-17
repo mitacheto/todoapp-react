@@ -20,9 +20,11 @@ router.post('/', auth, async (req, res) => {
 });
 
 router.get('/', auth, async (req, res) => {
-    const { todos } = await Todos.findOne({ userId: req.user.id });
+    const todos = await Todos.findOne({ userId: req.user.id });
     if (todos) {
-        res.json(todos);
+        res.json(todos.todos);
+    } else {
+        res.json({ message: 'There is no tasks' });
     }
 });
 

@@ -1,7 +1,7 @@
 export const handleErrors = async (response) => {
     if (!response.ok) {
-        const { message } = await response.json();
-        throw Error(message);
+        const { msg } = await response.json();
+        throw Error(msg);
     }
     return response.json();
-}
+};

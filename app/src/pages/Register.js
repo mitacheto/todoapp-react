@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { handleErrors } from '../services/handleErrors';
+import './Register.scss';
 
 export default function Register() {
     const [username, setUsername] = useState('');
@@ -51,11 +52,8 @@ export default function Register() {
             .then(handleErrors)
             .then((res) => {
                 localStorage.setItem('token', res.token);
-                setCredentials({
-                    username,
-                    password,
-                });
-                navigate('/');
+                setCredentials(res.token);
+                navigate('/dashboard');
             })
             .catch((error) => {
                 setError(error.message);
@@ -64,19 +62,26 @@ export default function Register() {
 
     return (
         <div>
-            <h1>Register</h1>
-            {error && <span style={{ color: 'red' }}>{error}</span>}
-            <form onSubmit={register}>
-                <label htmlFor='username'>Username</label>
-                <input onChange={usernameStateHandler} id='username' />
-                <br />
-                <label htmlFor='password'>Password</label>
-                <input type='password' onChange={passwordStateHandler} id='password' />
-                <br />
-                <label htmlFor='confirmPassword'>Confirm Password</label>
-                <input type='password' onChange={confirmPasswordStateHandler} id='password' />
-                <br />
-                <button type='Submit'>Register</button>
+            <h1 className='registerText'>Register</h1>
+            {error && <div className='errorMsg'>{error}</div>}
+            <form onSubmit={register} className='registerForm'>
+                <ul>
+                    <li>
+                        <label htmlFor='username'>Username</label>
+                        <input onChange={usernameStateHandler} id='username' />
+                    </li>
+                    <li>
+                        <label htmlFor='password'>Password</label>
+                        <input type='password' onChange={passwordStateHandler} id='password' />
+                    </li>
+                    <li>
+                        <label htmlFor='confirmPassword'>Confirm Password</label>
+                        <input type='password' onChange={confirmPasswordStateHandler} id='password' />
+                    </li>
+                    <li>
+                        <button type='Submit'>Register</button>
+                    </li>
+                </ul>
             </form>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { handleErrors } from '../services/handleErrors';
+import './Login.scss';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -41,11 +42,8 @@ export default function Login() {
             .then(handleErrors)
             .then((res) => {
                 localStorage.setItem('token', res.token);
-                setCredentials({
-                    username,
-                    password,
-                });
-                navigate('/');
+                setCredentials(res.token);
+                navigate('/dashboard');
             })
             .catch((error) => {
                 setError(error.message);
@@ -54,16 +52,22 @@ export default function Login() {
 
     return (
         <div>
-            <h1>Login</h1>
-            {error && <span style={{ color: 'red' }}>{error}</span>}
-            <form onSubmit={login}>
-                <label htmlFor='username'>Username</label>
-                <input onChange={usernameStateHandler} id='username' />
-                <br />
-                <label htmlFor='password'>Password</label>
-                <input type='password' onChange={passwordStateHandler} id='password' />
-                <br />
-                <button type='Submit'>Login</button>
+            <h1 className='loginText'>Login</h1>
+            {error && <div className='errorMsg'>{error}</div>}
+            <form onSubmit={login} className='loginForm'>
+                <ul>
+                    <li>
+                        <label htmlFor='username'>Username</label>
+                        <input onChange={usernameStateHandler} id='username' />
+                    </li>
+                    <li>
+                        <label htmlFor='password'>Password</label>
+                        <input type='password' onChange={passwordStateHandler} id='password' />
+                    </li>
+                    <li>
+                        <button type='Submit'>Login</button>
+                    </li>
+                </ul>
             </form>
         </div>
     );
