@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { handleErrors } from '../services/handleErrors';
 import './Register.scss';
@@ -83,6 +83,9 @@ export default function Register() {
                     </li>
                 </ul>
             </form>
+            <div className='haveRegistrationText'>
+                Already have registration? <Link to='/login'>Login</Link>
+            </div>
         </div>
     );
 }

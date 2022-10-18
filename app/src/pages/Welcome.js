@@ -15,7 +15,7 @@ export default function Welcome() {
     return (
         <>
             <h1 className='welcomeText'>
-                Welcome to your <span className='appName'>To Do App</span>
+                Welcome to your <span className='appName'>To Do List</span>
             </h1>
             <div className='buttonsContainer'>
                 {!credentials && (

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { handleErrors } from '../services/handleErrors';
 import './Login.scss';
@@ -69,6 +69,9 @@ export default function Login() {
                     </li>
                 </ul>
             </form>
+            <div className='dontHaveRegistrationText'>
+                Don't have registration ? <Link to='/register'>Register</Link>
+            </div>
         </div>
     );
 }

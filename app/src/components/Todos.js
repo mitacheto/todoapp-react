@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import './Todos.scss';
 
 export default function Todos() {
     const [todos, setTodos] = useState([]);
-    const [filteredTodos, setFilteredTodos] = useState([]);
     const [todoText, setTodoText] = useState('');
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState('uncompleted');
-    const [updatedStateOfTodos, setUpdatedStateOfTodos] = useState();
 
     const persist = (newTodos) => {
         fetch('http://localhost:4000/todos', {
@@ -31,16 +29,10 @@ export default function Todos() {
             .then((todos) => {
                 if (!todos.message) {
                     setTodos(todos);
-                    setFilteredTodos(todos.filter((todo) => (filter === 'uncompleted' ? !todo.checked : todo.checked)));
                 }
-                setUpdatedStateOfTodos(false);
                 setLoading(false);
             });
-    }, [, updatedStateOfTodos]);
-
-    useEffect(() => {
-        setFilteredTodos(todos.filter((todo) => (filter === 'uncompleted' ? !todo.checked : todo.checked)));
-    }, [filter]);
+    }, []);
 
     const addTodo = (e) => {
         e.preventDefault();
@@ -55,7 +47,6 @@ export default function Todos() {
         setTodos(newTodos);
         setTodoText('');
         persist(newTodos);
-        setUpdatedStateOfTodos(true);
     };
 
     const toggleTodo = (index) => {
@@ -65,38 +56,37 @@ export default function Todos() {
         task.checked = !task.checked;
 
         setTodos(newTodoList);
-        setFilteredTodos(newTodoList.filter((todo) => (filter === 'uncompleted' ? !todo.checked : todo.checked)));
         persist(newTodoList);
     };
 
-    const changeFilter = (newFilter) => {
-        setFilter(newFilter);
-    };
-
+    // TODO: make the remove task button to work
     return (
-        <>
+        <div className='todosContainer'>
             {loading ? (
                 <div>Loading Tasks</div>
             ) : (
-                <div>
-                    <select onChange={(e) => changeFilter(e.target.value)}>
-                        <option value='uncompleted'>Uncompleted</option>
-                        <option value='completed'>Completed</option>
-                    </select>
-                    {filteredTodos &&
-                        filteredTodos.map((todo) => (
-                            <div key={todo._id}>
-                                <input checked={todo.checked} onChange={() => toggleTodo(todo._id)} type='checkbox' />
-                                <label>{todo.text}</label>
+                <>
+                    {todos &&
+                        todos.map((todo) => (
+                            <div className='taskContainer' key={todo._id}>
+                                <div className={todo.checked ? 'finished' : 'unfinished'} key={todo._id}>
+                                    <input checked={todo.checked} onChange={() => toggleTodo(todo._id)} type='checkbox' />
+                                    <label>{todo.text}</label>
+                                </div>
+                                <span className='removeTask'>
+                                    <button className='removeBtn'>Remove</button>
+                                </span>
                             </div>
                         ))}
                     <br />
-                    <form onSubmit={addTodo}>
-                        <input value={todoText} onChange={(e) => setTodoText(e.target.value)} type='text' />
-                        <button type='submit'>Add</button>
+                    <form className='createTaskForm' onSubmit={addTodo}>
+                        <input className='textInput' value={todoText} onChange={(e) => setTodoText(e.target.value)} type='text' />
+                        <button className='submitBtn' type='submit'>
+                            Add
+                        </button>
                     </form>
-                </div>
+                </>
             )}
-        </>
+        </div>
     );
 }
