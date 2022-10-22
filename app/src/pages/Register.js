@@ -39,6 +39,11 @@ export default function Register() {
             return;
         }
 
+        if (password.length < 8) {
+            setError('Password needs to be atleast 8 characters');
+            return;
+        }
+
         fetch('http://localhost:4000/user/register', {
             method: 'POST',
             headers: {
