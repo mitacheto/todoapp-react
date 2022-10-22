@@ -14,7 +14,7 @@ export default function Todos() {
                 'x-auth-token': `${localStorage.token}`,
             },
             body: JSON.stringify(newTodos),
-        }).then((res) => {});
+        }).then((res) => res.json()).then((res) => setTodos(res));
     };
 
     useEffect(() => {
@@ -44,7 +44,6 @@ export default function Todos() {
         const newTodo = { checked: false, text: todoText };
         const newTodos = [...todos, newTodo];
 
-        setTodos(newTodos);
         setTodoText('');
         persist(newTodos);
     };
@@ -58,6 +57,13 @@ export default function Todos() {
         setTodos(newTodoList);
         persist(newTodoList);
     };
+
+    const handleRemoveTask = (index) => {
+        const newTodoList = [...todos];
+        const updatedTodoList = newTodoList.filter((task) => task._id !== index);
+
+        persist(updatedTodoList);
+    }
 
     // TODO: make the remove task button to work
     return (
@@ -74,7 +80,7 @@ export default function Todos() {
                                     <label>{todo.text}</label>
                                 </div>
                                 <span className='removeTask'>
-                                    <button className='removeBtn'>Remove</button>
+                                    <button onClick={() => handleRemoveTask(todo._id)} className='removeBtn'>Remove</button>
                                 </span>
                             </div>
                         ))}
