@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post('/', auth, async (req, res) => {
     const todos = await Todos.findOne({ userId: req.user.id });
-    console.log(req.body);
     if (!todos) {
         await Todos.create({
             userId: req.user.id,
@@ -16,7 +15,8 @@ router.post('/', auth, async (req, res) => {
         todos.todos = req.body;
         await todos.save();
     }
-    res.send(req.body);
+
+    res.send(todos.todos);
 });
 
 router.get('/', auth, async (req, res) => {
