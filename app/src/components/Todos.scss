@@ -1,6 +1,7 @@
 .todosContainer {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .taskContainer {
         display: flex;
@@ -9,10 +10,44 @@
         margin-top: 5px;
         margin-bottom: 5px;
         align-items: center;
+        background-color: #ea4c89;
+        border-radius: 10px;
+        padding: 10px 10px 10px 10px;
+        color: white;
+        font-weight: bold;
+
+        .removeBtn {
+            background-color: red;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            height: 30px;
+            line-height: 20px;
+            list-style: none;
+            margin: 0;
+            outline: none;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .removeBtn:hover {
+            background-color: rgb(160, 0, 0);
+        }
+
+        label {
+            margin-left: 10px;
+        }
     }
 }
 
-.removeBtn,
 .submitBtn {
     background-color: #ea4c89;
     border-radius: 8px;
@@ -35,9 +70,8 @@
     touch-action: manipulation;
 }
 
-.removeBtn,
 .submitBtn:hover,
-:focus {
+.submitBtn:focus {
     background-color: #f082ac;
 }
 
@@ -45,7 +79,18 @@
     margin-left: 10px;
 }
 
-.textInput {
+.createTaskInput {
     outline: none;
     border-radius: 10px;
+    background-color: white;
+}
+
+.createTaskForm {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-self: center;
+}
+
+.noTasks {
+    text-align: center;
 }
