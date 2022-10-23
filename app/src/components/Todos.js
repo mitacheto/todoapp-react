@@ -14,7 +14,11 @@ export default function Todos() {
                 'x-auth-token': `${localStorage.token}`,
             },
             body: JSON.stringify(newTodos),
-        }).then((res) => res.json()).then((res) => setTodos(res));
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setTodos(res);
+            });
     };
 
     useEffect(() => {
@@ -54,39 +58,39 @@ export default function Todos() {
 
         task.checked = !task.checked;
 
-        setTodos(newTodoList);
         persist(newTodoList);
     };
 
     const handleRemoveTask = (index) => {
         const newTodoList = [...todos];
         const updatedTodoList = newTodoList.filter((task) => task._id !== index);
-
         persist(updatedTodoList);
-    }
+    };
 
-    // TODO: make the remove task button to work
     return (
         <div className='todosContainer'>
             {loading ? (
                 <div>Loading Tasks</div>
             ) : (
                 <>
-                    {todos &&
+                    {todos && todos.length > 0 ? (
                         todos.map((todo) => (
                             <div className='taskContainer' key={todo._id}>
                                 <div className={todo.checked ? 'finished' : 'unfinished'} key={todo._id}>
                                     <input checked={todo.checked} onChange={() => toggleTodo(todo._id)} type='checkbox' />
                                     <label>{todo.text}</label>
                                 </div>
-                                <span className='removeTask'>
-                                    <button onClick={() => handleRemoveTask(todo._id)} className='removeBtn'>Remove</button>
-                                </span>
+                                <button onClick={() => handleRemoveTask(todo._id)} className='removeBtn'>
+                                    Remove
+                                </button>
                             </div>
-                        ))}
+                        ))
+                    ) : (
+                        <div className='noTasks'>Create your first task</div>
+                    )}
                     <br />
                     <form className='createTaskForm' onSubmit={addTodo}>
-                        <input className='textInput' value={todoText} onChange={(e) => setTodoText(e.target.value)} type='text' />
+                        <input className='createTaskInput' value={todoText} onChange={(e) => setTodoText(e.target.value)} type='text' />
                         <button className='submitBtn' type='submit'>
                             Add
                         </button>
