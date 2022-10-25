@@ -1,10 +1,10 @@
-.loginText {
+.login-header {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.errorMsg {
+.error-message {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -18,7 +18,7 @@
     font-weight: bold;
 }
 
-.loginForm {
+.login-form {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -28,60 +28,54 @@
     margin-right: 30%;
     align-items: center;
 
-    input {
-        background-color: white;
-    }
-
-    li {
+    .login-item {
         display: flex;
         flex-direction: column;
-        margin-top: 10%;
-        list-style-type: none;
+        align-items: center;
         text-align: center;
-    }
+        margin-top: 10px;
+        margin-bottom: 10px;
 
-    ul {
-        display: flex;
-        flex-direction: column;
-        display: block;
-        padding-inline-start: 0;
-    }
+        input {
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+        }
+        button {
+            margin-bottom: 10%;
+            background-color: #720730;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            list-style: none;
+            margin: 0;
+            outline: none;
+            padding: 10px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
 
-    button {
-        margin-bottom: 10%;
-        background-color: #720730;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #ffffff;
-        cursor: pointer;
-        display: inline-block;
-        font-family: 'Haas Grot Text R Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-    }
-
-    button:hover,
-    button:focus {
-        background-color: #99043d;
+        button:hover,
+        button:focus {
+            background-color: #99043d;
+        }
     }
 }
 
-.dontHaveRegistrationText {
+.no-registration {
     display: flex;
     justify-content: center;
     text-decoration: none;
