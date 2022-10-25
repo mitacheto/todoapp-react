@@ -12,15 +12,20 @@ export default function Dashboard() {
     const [username, setUsername] = useState();
 
     useEffect(() => {
-        if (!localStorage.length > 0) {
-            navigate('/');
-        }
-
         (async () => {
             await getUserInfo()
                 .then((res) => res.json())
                 .then((userData) => {
-                    setUsername(userData.user.username);
+                    if (userData) {
+                        if (userData.msg !== 'Token is not valid') {
+                            setCredentials(localStorage.getItem('token'));
+                            setUsername(userData.user.username);
+                        } else {
+                            setCredentials(null);
+                            localStorage.clear();
+                            navigate('/');
+                        }
+                    }
                 });
         })();
     }, []);

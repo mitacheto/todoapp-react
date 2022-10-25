@@ -8,6 +8,7 @@ export default function Welcome() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(credentials);
         if (localStorage.length > 0) {
             setCredentials(localStorage.getItem('token'));
             navigate('/dashboard');
