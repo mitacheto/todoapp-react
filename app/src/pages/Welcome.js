@@ -13,11 +13,11 @@ export default function Welcome() {
     }
 
     return (
-        <>
-            <h1 className='welcomeText'>
-                Welcome to your <span className='appName'>To Do List</span>
+        <div className='welcome-container'>
+            <h1 className='welcome-text'>
+                Welcome to your <span className='app-name'>To Do List</span>
             </h1>
-            <div className='buttonsContainer'>
+            <div className='buttons-container'>
                 {!credentials && (
                     <Link to='/login' className='button'>
                         Login
@@ -29,6 +29,6 @@ export default function Welcome() {
                     </Link>
                 )}
             </div>
-        </>
+        </div>
     );
 }

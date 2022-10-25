@@ -51,25 +51,23 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <h1 className='loginText'>Login</h1>
-            {error && <div className='errorMsg'>{error}</div>}
-            <form onSubmit={login} className='loginForm'>
-                <ul>
-                    <li>
-                        <label htmlFor='username'>Username</label>
-                        <input onChange={usernameStateHandler} id='username' />
-                    </li>
-                    <li>
-                        <label htmlFor='password'>Password</label>
-                        <input type='password' onChange={passwordStateHandler} id='password' />
-                    </li>
-                    <li>
-                        <button type='Submit'>Login</button>
-                    </li>
-                </ul>
+        <div className='login-container'>
+            <h1 className='login-header'>Login</h1>
+            {error && <div className='error-message'>{error}</div>}
+            <form onSubmit={login} className='login-form'>
+                <div className='login-item'>
+                    <label htmlFor='username'>Username</label>
+                    <input onChange={usernameStateHandler} id='username' />
+                </div>
+                <div className='login-item'>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' onChange={passwordStateHandler} id='password' />
+                </div>
+                <div className='login-item'>
+                    <button type='submit'>Login</button>
+                </div>
             </form>
-            <div className='dontHaveRegistrationText'>
+            <div className='no-registration'>
                 Don't have registration ? <Link to='/register'>Register</Link>
             </div>
         </div>

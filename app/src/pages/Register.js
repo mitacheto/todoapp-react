@@ -58,7 +58,7 @@ export default function Register() {
             .then((res) => {
                 localStorage.setItem('token', res.token);
                 setCredentials(res.token);
-                navigate('/dashboard');
+                navigate('/login');
             })
             .catch((error) => {
                 setError(error.message);
@@ -66,29 +66,27 @@ export default function Register() {
     };
 
     return (
-        <div>
-            <h1 className='registerText'>Register</h1>
-            {error && <div className='errorMsg'>{error}</div>}
-            <form onSubmit={register} className='registerForm'>
-                <ul>
-                    <li>
-                        <label htmlFor='username'>Username</label>
-                        <input onChange={usernameStateHandler} id='username' />
-                    </li>
-                    <li>
-                        <label htmlFor='password'>Password</label>
-                        <input type='password' onChange={passwordStateHandler} id='password' />
-                    </li>
-                    <li>
-                        <label htmlFor='confirmPassword'>Confirm Password</label>
-                        <input type='password' onChange={confirmPasswordStateHandler} id='password' />
-                    </li>
-                    <li>
-                        <button type='Submit'>Register</button>
-                    </li>
-                </ul>
+        <div className='login-container'>
+            <h1 className='register-header'>Register</h1>
+            {error && <div className='error-message'>{error}</div>}
+            <form onSubmit={register} className='register-form'>
+                <div className='register-item'>
+                    <label htmlFor='username'>Username</label>
+                    <input onChange={usernameStateHandler} id='username' />
+                </div>
+                <div className='register-item'>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' onChange={passwordStateHandler} id='password' />
+                </div>
+                <div className='register-item'>
+                    <label htmlFor='confirmPassword'>Confirm Password</label>
+                    <input type='password' onChange={confirmPasswordStateHandler} id='password' />
+                </div>
+                <div className='register-item'>
+                    <button type='submit'>Register</button>
+                </div>
             </form>
-            <div className='haveRegistrationText'>
+            <div className='have-registration'>
                 Already have registration? <Link to='/login'>Login</Link>
             </div>
         </div>
