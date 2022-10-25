@@ -8,10 +8,14 @@ import './Dashboard.scss';
 export default function Dashboard() {
     const navigate = useNavigate();
 
-    const [, setCredentails] = useContext(CredentialsContext);
+    const [, setCredentials] = useContext(CredentialsContext);
     const [username, setUsername] = useState();
 
     useEffect(() => {
+        if (!localStorage.length > 0) {
+            navigate('/');
+        }
+
         (async () => {
             await getUserInfo()
                 .then((res) => res.json())
@@ -22,7 +26,7 @@ export default function Dashboard() {
     }, []);
 
     const logout = () => {
-        setCredentails(null);
+        setCredentials(null);
         localStorage.clear();
         navigate('/');
     };

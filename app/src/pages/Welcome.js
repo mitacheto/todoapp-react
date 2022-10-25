@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import './Welcome.scss';
 
 export default function Welcome() {
-    const [credentials, setCredentails] = useContext(CredentialsContext);
+    const [credentials, setCredentials] = useContext(CredentialsContext);
     const navigate = useNavigate();
 
-    if (localStorage.length > 0) {
-        setCredentails(localStorage.getItem('token'));
-        navigate('/dashboard');
-    }
+    useEffect(() => {
+        if (localStorage.length > 0) {
+            setCredentials(localStorage.getItem('token'));
+            navigate('/dashboard');
+        }
+    }, []);
 
     return (
         <div className='welcome-container'>

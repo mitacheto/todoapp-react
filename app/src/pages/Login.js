@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { handleErrors } from '../services/handleErrors';
@@ -10,6 +10,13 @@ export default function Login() {
     const [error, setError] = useState('');
     const [, setCredentials] = useContext(CredentialsContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.length > 0) {
+            setCredentials(localStorage.getItem('token'));
+            navigate('/dashboard');
+        }
+    }, []);
 
     const usernameStateHandler = (e) => {
         setUsername(e.target.value);
